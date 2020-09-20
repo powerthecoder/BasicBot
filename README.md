@@ -1,0 +1,2 @@
+# BasicBot
+BaSiC's Bot
