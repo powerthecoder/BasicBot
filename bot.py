@@ -58,13 +58,26 @@ async def on_message_delete(message):
 
 ##      Commands        ##
 
-@client.commands()
+@client.command()
 async def help(ctx):
     embed=discord.Embed(title="Help Menu", description="Prefix `$`")
-    embed.add_field(name="`$help`", value="Get Help Menu")
-    embed.add_field(name="`$mutevc <mins>`", value="To mute a enitre Voice Channel that you are in. `<mins>` is optional, but this will unmute the voice channel after the amount of mins have passed")
-    embed.add_field(name="`$unmutevc`", value="To unmute a Voice Channel that you are in")
-    embed.add_field(name="`$warn @user <reason>`", value="To give a warning to someone")
+    embed.add_field(name="`$about`", value="Information On Bot", inline=False)
+    embed.add_field(name="`$help`", value="Get Help Menu", inline=False)
+    embed.add_field(name="`$mutevc <mins>`", value="To mute a enitre Voice Channel that you are in. `<mins>` is optional, but this will unmute the voice channel after the amount of mins have passed", inline=False)
+    embed.add_field(name="`$unmutevc`", value="To unmute a Voice Channel that you are in", inline=False)
+    embed.add_field(name="`$warn @user <reason>`", value="To give a warning to someone", inline=False)
+    await ctx.send(embed=embed)
+
+
+@client.command()
+async def about(ctx):
+    author = ctx.message.author
+    mod_logs = client.get_channel(757145970159910982)
+    dev_logs = client.get_channel(665553350355582986)
+    await ctx.message.delete()
+    embed=discord.Embed(title="About", description="**About BasicBot** \n\n**Developer:** <@255876083918831616> \n**Created For:** <@518854761714417664>\n**Developer Website:** https://powerthecoder.xyz/ \n**GitHub:** https://github.com/powerthecoder \n**Discord Server:** https://discord.gg/bQCZMDE")
+    await ctx.send(embed=embed)
+    await mod_logs.send(embed=embed)
 
 
 @client.command(pass_context=True)
