@@ -74,8 +74,7 @@ async def about(ctx):
     author = ctx.message.author
     mod_logs = client.get_channel(757145970159910982)
     dev_logs = client.get_channel(665553350355582986)
-    await ctx.message.delete()
-    embed=discord.Embed(title="About", description="**About BasicBot** \n\n**Developer:** <@255876083918831616> \n**Created For:** <@518854761714417664>\n**Developer Website:** https://powerthecoder.xyz/ \n**GitHub:** https://github.com/powerthecoder \n**Discord Server:** https://discord.gg/bQCZMDE")
+    embed=discord.Embed(title="About", description="**About BasicBot** \n\n**Developer:** <@209824395915558912> \n**Created For:** <@518854761714417664>\n**Developer Website:** https://powerthecoder.xyz/ \n**GitHub:** https://github.com/powerthecoder \n**Discord Server:** https://discord.gg/bQCZMDE")
     await ctx.send(embed=embed)
     await mod_logs.send(embed=embed)
 
