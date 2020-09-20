@@ -120,7 +120,7 @@ async def warn(ctx, user_name:discord.Member, *,args=None):
         with open('/home/leo/ftp/Discord/BasicBot/warnings.json', 'w') as f:
             json.dump(users, f)
 
-client.run("NzU3MTQyNDE5OTM3NDI3NTM3.X2cF0w.q5p0EWOXStjpYDtj_tEMJoGD-j4")
+client.run("")
     
 
 
