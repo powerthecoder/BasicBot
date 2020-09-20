@@ -106,6 +106,8 @@ async def warn(ctx, user_name:discord.Member, *,args=None):
             embed=discord.Embed(title="Warning", description=f"**User Warnned:** {user_name} \n**Total Warnings:** 1 \n**Warned By:** {author} \n**Reason:** {args}", color=orange)
             await ctx.send(f'<@{userid}>')
             await ctx.send(embed=embed)
+            await mod_logs.send(f'<@{userid}>')
+            await dev_logs.send(embed=embed)
         else:
             warnam = int(users[f'{target}'])
             warnam += 1
@@ -113,6 +115,8 @@ async def warn(ctx, user_name:discord.Member, *,args=None):
             embed=discord.Embed(title="Warning", description=f"**User Warnned:** {user_name} \n**Total Warnings:** {warnam} \n**Warned By:** {author} \n**Reason:** {args}", color=orange)
             await ctx.send(f'<@{userid}>')
             await ctx.send(embed=embed)
+            await mod_logs.send(f'<@{userid}>')
+            await dev_logs.send(embed=embed)
         with open('/home/leo/ftp/Discord/BasicBot/warnings.json', 'w') as f:
             json.dump(users, f)
 
