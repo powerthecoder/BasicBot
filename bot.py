@@ -25,6 +25,8 @@ async def on_ready():
     print(" ")
     print(" ")
 
+client.remove_command('help')
+
 @client.event
 async def on_member_join(member):
     mod_logs = client.get_channel(757145970159910982)
@@ -55,6 +57,15 @@ async def on_message_delete(message):
 
 
 ##      Commands        ##
+
+@client.commands()
+async def help(ctx):
+    embed=discord.Embed(title="Help Menu", description="Prefix `$`")
+    embed.add_field(name="`$help`", value="Get Help Menu")
+    embed.add_field(name="`$mutevc <mins>`", value="To mute a enitre Voice Channel that you are in. `<mins>` is optional, but this will unmute the voice channel after the amount of mins have passed")
+    embed.add_field(name="`$unmutevc`", value="To unmute a Voice Channel that you are in")
+    embed.add_field(name="`$warn @user <reason>`", value="To give a warning to someone")
+
 
 @client.command(pass_context=True)
 @has_permissions(manage_messages=True)
