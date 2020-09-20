@@ -57,10 +57,10 @@ async def on_message_delete(message):
 ##      Commands        ##
 
 @client.command(pass_context=True)
-@has_permissions(mute_members=True)
+@has_permissions(manage_messages=True)
 async def mutevc(ctx, *,args=None):
     if (args == None):
-        channel = ctx.message.author.voice.voice_channel
+        channel = ctx.author.voice.channel
         await channel.set_permissions(ctx.guild.default_role, speak=False, use_voice_activation=False)
         embed=discord.Embed(title="Voice Muted", description=f"**Channel Muted:** {channel} \n**Muted By:** {ctx.message.author} \n**Duration:** None")
         await ctx.send(embed=embed)
@@ -69,20 +69,36 @@ async def mutevc(ctx, *,args=None):
         await mod_logs.send(embed=embed)
         await dev_logs.send(embed=embed)
     else:
-        channel = ctx.message.author.voice.voice_channel
+        channel = ctx.author.voice.channel
         await channel.set_permissions(ctx.guild.default_role, speak=False, use_voice_activation=False)
-        embed=discord.Embed(title="Voice Muted", description=f"**Channel Muted:** {channel} \n**Muted By:** {ctx.message.author} \n**Duration:** None")
+        embed=discord.Embed(title="Voice Muted", description=f"**Channel Muted:** {channel} \n**Muted By:** {ctx.message.author} \n**Duration:** {args}")
         await ctx.send(embed=embed)
         mod_logs = client.get_channel(757145970159910982)
         dev_logs = client.get_channel(665553350355582986)
         await mod_logs.send(embed=embed)
         await dev_logs.send(embed=embed)
         try:
-            await asyncio.sleep(int(args))
+            mins = int(args) * 60
+            await asyncio.sleep(mins)
         except Exception as e:
             await ctx.send("Please use a number. Number is counted as mins")
         await channel.set_permissions(ctx.guild.default_role, speak=True, use_voice_activation=True)
-        await ctx.send(f"**{channel}** Unmuted")
+        msg = ctx.send(f"**{channel}** Unmuted")
+        await asyncio.sleep(10)
+        await msg.delete()
+
+
+@client.command(pass_context=True)
+@has_permissions(manage_messages=True)
+async def unmutevc(ctx):
+    channel = ctx.author.voice.channel
+    await channel.set_permissions(ctx.guild.default_role, speak=True, use_voice_activation=True)
+    embed=discord.Embed(title="Voice Unmuted", description=f"**Channel Unmuted:** {channel} \n**Muted By:** {ctx.message.author}")
+    await ctx.send(embed=embed)
+    mod_logs = client.get_channel(757145970159910982)
+    dev_logs = client.get_channel(665553350355582986)
+    await mod_logs.send(embed=embed)
+    await dev_logs.send(embed=embed)
 
 
 @client.command(pass_context=True)
@@ -103,20 +119,24 @@ async def warn(ctx, user_name:discord.Member, *,args=None):
         if not f'{target}' in users:
             users[f'{target}'] = {}
             users[f'{target}'] = 1
-            embed=discord.Embed(title="Warning", description=f"**User Warnned:** {user_name} \n**Total Warnings:** 1 \n**Warned By:** {author} \n**Reason:** {args}", color=orange)
+            embed=discord.Embed(title="Warning", description=f"**User Warnned:** {user_name} \n**Total Warnings:** 1 \n**Warned By:** {author} \n**Reason:** {args}")
             await ctx.send(f'<@{userid}>')
             await ctx.send(embed=embed)
             await mod_logs.send(f'<@{userid}>')
+            await dev_logs.send(f'<@{userid}>')
             await dev_logs.send(embed=embed)
+            await mod_logs.send(embed=embed)
         else:
             warnam = int(users[f'{target}'])
             warnam += 1
             users[f'{target}'] = warnam
-            embed=discord.Embed(title="Warning", description=f"**User Warnned:** {user_name} \n**Total Warnings:** {warnam} \n**Warned By:** {author} \n**Reason:** {args}", color=orange)
+            embed=discord.Embed(title="Warning", description=f"**User Warnned:** {user_name} \n**Total Warnings:** {warnam} \n**Warned By:** {author} \n**Reason:** {args}")
             await ctx.send(f'<@{userid}>')
             await ctx.send(embed=embed)
             await mod_logs.send(f'<@{userid}>')
+            await dev_logs.send(f'<@{userid}>')
             await dev_logs.send(embed=embed)
+            await mod_logs.send(embed=embed)
         with open('/home/leo/ftp/Discord/BasicBot/warnings.json', 'w') as f:
             json.dump(users, f)
 
