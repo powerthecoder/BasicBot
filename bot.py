@@ -50,10 +50,10 @@ async def on_member_remove(member):
 async def on_message_delete(message):
     mod_logs = client.get_channel(757145970159910982)
     dev_logs = client.get_channel(665553350355582986)
-    embed=discord.Embed(title="Message Delted", description=f"**Message:** {message.content} \n**Author:** {message.author.mention} \n**Channel:** <#{message.channel.id}>")
+    embed=discord.Embed(title="Message Deleted", description=f"**Message:** {message.content} \n**Author:** {message.author.mention} \n**Channel:** <#{message.channel.id}>")
     await mod_logs.send(embed=embed)
     await dev_logs.send(embed=embed)
-    print("Someone delted a message")
+    print("Someone deleted a message")
 
 
 ##      Commands        ##
