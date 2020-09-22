@@ -85,7 +85,7 @@ async def mutevc(ctx, *,args=None):
     if (args == None):
         channel = ctx.author.voice.channel
         await channel.set_permissions(ctx.guild.default_role, speak=False, use_voice_activation=False)
-        embed=discord.Embed(title="Voice Muted", description=f"**Channel Muted:** {channel} \n**Muted By:** {ctx.message.author} \n**Duration:** None")
+        embed=discord.Embed(title="Voice Muted", description=f"**Channel Muted:** {channel} \n**Unmuted By:** {ctx.message.author} \n**Duration:** None")
         await ctx.send(embed=embed)
         mod_logs = client.get_channel(757145970159910982)
         dev_logs = client.get_channel(665553350355582986)
